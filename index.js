@@ -1,6 +1,6 @@
 const admin = require("firebase-admin");
 /** firebase admin json파일 가져오기 */
-const serviceAccount = require("./firebase admin json파일");
+const serviceAccount = require("./dev-wiiee-1e390-firebase-adminsdk-ba7cy-201f474f11.json");
 
 // Firebase Admin SDK 초기화
 admin.initializeApp({
@@ -8,23 +8,23 @@ admin.initializeApp({
 });
 
 // FCM 메시지 보내기 함수
-async function sendFcmMessage(token, title, body, index) {
+async function sendFcmMessage({ token, title, body, index, data }) {
   const message = {
     notification: {
       title: title,
       body: body,
     },
     android: {
-      notification: {
-        channel_id: "channel_01",
-        sound: "push_notification", // .mp3 또는 .wav 확장자를 제외한 파일 이름
-      },
+      // notification: {
+      //   channel_id: "zamfit_01",
+      // },
+      // sound: "zamfit_01", // .mp3 또는 .wav 확장자를 제외한 파일 이름
     },
     apns: {
       payload: {
         aps: {
-          sound: "push_notification.wav", // .wav 파일 이름 (확장자 포함)
-          badge: 1, // 배지 카운터 지정 가능
+          // sound: "zamfit_01.wav", // .wav 파일 이름 (확장자 포함)
+          // badge: 1, // 배지 카운터 지정 가능
         },
       },
     },
@@ -39,20 +39,49 @@ async function sendFcmMessage(token, title, body, index) {
     console.error(`${index}번째 배열 Error sending message:`, error);
   }
 }
-
-const pathList = [
-  "/battle?initialIndex=1",
-  "/battle/QarVMZmgwte4SCesEsS0/inProgress?initialIndex=2",
-];
-
+/**
+ * ```
+json: JSON.stringify({
+    tabIndex: "HOME", // home tab 유지
+    navigationType: "PUSH", 
+    deeplink: "zamfit://how_to_use_point",
+    routes: [
+      // page 스택 쌓기
+      {
+        path: "/mafia/reservation",
+        arg: {
+          eventId: 1,
+        },
+      },
+    ],
+  }),
+};
+ * ```
+ */
 const data = {
-  pathList: JSON.stringify(pathList),
+  json: JSON.stringify({
+    tabIndex: "HOME",
+    navigationType: "PUSH",
+    routes: [
+      {
+        path: "/contents_review",
+        arg: {
+          escapeRoomId: 5010,
+        },
+      },
+    ],
+  }),
 };
 
 const tokens = [
-  "dGiYzYCfRPCg_dvM8LyFZJ:APA91bE6cMEFjHBjE-56sUBghBcrK8CaCBwoDw76QkQcz5PBXSBWbF_N-EPrTv2YEHLIkm-Pp_ENG5opEnPAD5D-mj8eDL3dl_YgktLkjDQkjF7dvQRlqJ5K05nsVD2th32bLXMiHheH",
+  "fqFozAk-T-C1COrCSQskkj:APA91bHh03eDBUhDxWsjBqlIEaNStP9Wu0Z2wBPLUkMJ92-ttRGgtJXwAlMfip4RVkWok61WhPARxGaxZV8xCWd1dF2Ch2rtxhUf4rd6SDeR7UV2BxFaRBM",
 ];
-
-tokens.map((e, index) => {
-  sendFcmMessage(e, "안녕하세요 ", "바디입니다.", index);
+tokens.map((token, index) => {
+  sendFcmMessage({
+    token,
+    title: "안녕하세요 ",
+    body: "바디입니다.",
+    index,
+    data,
+  });
 });

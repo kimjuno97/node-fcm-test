@@ -60,21 +60,19 @@ json: JSON.stringify({
  */
 const data = {
   json: JSON.stringify({
-    tabIndex: "HOME",
+    tabIndex: "MEMBER_RECRUITMENT",
     navigationType: "PUSH",
+    deeplink: "zamfit://recruitments/detail/12",
     routes: [
       {
-        path: "/contents_review",
-        arg: {
-          escapeRoomId: 5010,
-        },
+        path: "/recruitments/detail/12",
       },
     ],
   }),
 };
 
 const tokens = [
-  "fqFozAk-T-C1COrCSQskkj:APA91bHh03eDBUhDxWsjBqlIEaNStP9Wu0Z2wBPLUkMJ92-ttRGgtJXwAlMfip4RVkWok61WhPARxGaxZV8xCWd1dF2Ch2rtxhUf4rd6SDeR7UV2BxFaRBM",
+  "dItRYsIs-0YpkEyw6zdrrn:APA91bFssQmQCfeu_vLoMB_7-6862B_iok776DMv4slt3oyS8agaSzOKje0VSBus5kyv617r712j2HBXM6wB9Hfko5PWVjUezHqEb4Yox__Q1X1tNGuxahQ",
 ];
 tokens.map((token, index) => {
   sendFcmMessage({

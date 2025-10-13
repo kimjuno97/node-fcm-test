@@ -61,18 +61,19 @@ json: JSON.stringify({
 const data = {
   json: JSON.stringify({
     tabIndex: "MEMBER_RECRUITMENT",
-    navigationType: "PUSH",
-    deeplink: "zamfit://recruitments/detail/12",
-    routes: [
-      {
-        path: "/recruitments/detail/12",
-      },
-    ],
+    path: "https://applink.zamfit.kr/review/create?escapeId=1",
+
+    // deeplink: "zamfit://recruitments/detail/12",
+    // routes: [
+    //   {
+    //     path: "/recruitments/detail/12",
+    //   },
+    // ],
   }),
 };
 
 const tokens = [
-  "dItRYsIs-0YpkEyw6zdrrn:APA91bFssQmQCfeu_vLoMB_7-6862B_iok776DMv4slt3oyS8agaSzOKje0VSBus5kyv617r712j2HBXM6wB9Hfko5PWVjUezHqEb4Yox__Q1X1tNGuxahQ",
+  "cvqijGpSRD2KuNiNDkICi-:APA91bE1Ax7I3YsV4kpbnF6-fV72ZJbmn1T4RI2t3UfFbZ4Wrhq5O6SqofIQrdOO97_JDxFKG5f2n668XPUmIvTuaYCA_2SRypt0zLuExaxjvd7aGAwpTPw",
 ];
 tokens.map((token, index) => {
   sendFcmMessage({

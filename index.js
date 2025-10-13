@@ -61,8 +61,8 @@ json: JSON.stringify({
 const data = {
   json: JSON.stringify({
     tabIndex: "MEMBER_RECRUITMENT",
-    path: "https://applink.zamfit.kr/review/create?escapeId=1",
-
+    // path: "https://applink.zamfit.kr/review/create?escapeId=1",
+    path: "zamfit://review/create?escapeId=1",
     // deeplink: "zamfit://recruitments/detail/12",
     // routes: [
     //   {

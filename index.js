@@ -15,17 +15,24 @@ async function sendFcmMessage({ token, title, body, index, data }) {
       body: body,
     },
     android: {
-      // notification: {
-      //   channel_id: "zamfit_01",
-      // },
+      // notification: { channel_id: "zamfit_01", },
       // sound: "zamfit_01", // .mp3 또는 .wav 확장자를 제외한 파일 이름
     },
     apns: {
+      headers: {
+        // (선택) 즉시 표시 우선도
+        "apns-priority": "10",
+      },
       payload: {
         aps: {
+          "mutable-content": 1, // ← 이 한 줄이 NSE 실행 트리거
           // sound: "zamfit_01.wav", // .wav 파일 이름 (확장자 포함)
           // badge: 1, // 배지 카운터 지정 가능
         },
+      },
+      fcm_options: {
+        // (선택) 리치 이미지 URL — HTTPS여야 함
+        // image: "https://example.com/banner.png",
       },
     },
     data,
@@ -60,9 +67,9 @@ json: JSON.stringify({
  */
 const data = {
   json: JSON.stringify({
-    tabIndex: "MEMBER_RECRUITMENT",
+    // tabIndex: "MY",
     // path: "https://applink.zamfit.kr/review/create?escapeId=1",
-    path: "zamfit://review/create?escapeId=1",
+    path: "zamfit://main?tabIndex=MY&userProfileTabIndex=3",
     // deeplink: "zamfit://recruitments/detail/12",
     // routes: [
     //   {
@@ -73,7 +80,7 @@ const data = {
 };
 
 const tokens = [
-  "cvqijGpSRD2KuNiNDkICi-:APA91bE1Ax7I3YsV4kpbnF6-fV72ZJbmn1T4RI2t3UfFbZ4Wrhq5O6SqofIQrdOO97_JDxFKG5f2n668XPUmIvTuaYCA_2SRypt0zLuExaxjvd7aGAwpTPw",
+  "e0zHMMcpTcWOSwClZg8uX3:APA91bEMDPLM3s1Wqh3xNgZQSZskTZQTp29ZLujjBdrP_rOFA2oX03mv0BDc_rQ5Rfw1QnOnmEpu2QlxT6i9UpgnJOAt4zAemcblT8zxLJnst6aFWc_Z6jI",
 ];
 tokens.map((token, index) => {
   sendFcmMessage({
